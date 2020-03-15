@@ -72,12 +72,14 @@ module.exports = {
       ];
     }
 
-    return Object.assign({}, config, {
+    return {
+      ...config,
       plugins,
       node: {
         fs: 'empty',
       },
-      module: Object.assign({}, config.module, {
+      module: {
+        ...config.module,
         rules: config.module.rules.concat([
           {
             test: /\.(css|md)$/,
@@ -122,8 +124,8 @@ module.exports = {
             use: options.defaultLoaders.babel,
           },
         ]),
-      }),
-    });
+      },
+    };
   },
   exportTrailingSlash: true,
   // Next.js provides a `defaultPathMap` argument, we could simplify the logic.
